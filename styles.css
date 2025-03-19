@@ -1,43 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    font-family: "Poppins", serif;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
-    background-color: #222831;
+    background-color: #1b1f24;
+    color: #eeeeee;
 }
 
+/* 🔹 الهيدر */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2rem auto;
-    max-width: 1200px;
+    padding: 1.5rem 5%;
+    background: rgba(0, 0, 0, 0.5); /* غامق مع البلور */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
-ncc=
+
+/* 🔹 قائمة التنقل */
 .navigation ul {
     display: flex;
     list-style-type: none;
     gap: 2rem;
 }
 
-.navigation a { /* ✅ تصحيح التحديد */
+.navigation a {
     text-decoration: none;
     color: #eeeeee;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
 }
 
 .navigation a:hover {
     color: #00adb5;
+    text-shadow: 0px 0px 10px rgba(0, 173, 181, 0.8);
 }
 
+/* 🔹 الخط الفاصل */
 hr {
-    opacity: 0.1; /* قيمة صحيحة */
+    opacity: 0.1;
 }
 
+/* 🔹 قسم الهيرو */
 .hero {
     display: flex;
     justify-content: space-between;
@@ -45,85 +59,194 @@ hr {
     margin: 5rem auto;
     max-width: 1200px;
 }
-.arrow {
-    position: absolute;
-    transform: translateX(-5.5rem) translateY(1.5rem);
-}
+
 .heroSub {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
+
 .name {
     font-size: 3rem;
+    font-weight: bold;
     color: #eeeeee;
+    transition: transform 0.3s ease-in-out, rotate 0.3s ease-in-out;
 }
-.aboutMe {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5rem auto;
-    max-width: 1200px;
-    gap: 10rem;
+
+.name:hover {
+    transform: scale(1.1) rotate(-3deg);
 }
-.aboutName {
-    color: #eeeeee;
+
+.name:active {
+    transform: scale(0.9);
 }
-.aboutTitle {
-    display: flex;
+
+.title {
+    font-size: 2rem;
     color: #00adb5;
 }
+
+/* 🔹 قسم About Me */
+.aboutMe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 5rem auto;
+    gap: 3rem;
+}
+
+.aboutMeImg {
+    width: 400px;
+    transition: transform 0.3s ease-in-out, rotate 0.3s ease-in-out;
+}
+
+.aboutMeImg:hover {
+    transform: scale(1.1) rotate(3deg);
+}
+
+.aboutMeImg:active {
+    transform: scale(0.9);
+}
+
+.textContainer {
+    flex: 1;
+    text-align: left;
+}
+
+.aboutName {
+    color: #eeeeee;
+    font-size: 2.5rem;
+}
+
+.aboutTitle {
+    color: #00adb5;
+    font-size: 2.5rem;
+}
+
 .aboutMePar {
     text-align: justify;
-    color: rgba(238, 2538, 238, 0.75);
+    color: rgba(238, 238, 238, 0.75);
 }
+
+/* 🔹 قسم المشاريع */
+.worksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: auto;
+    padding: 5rem 0;
+}
+
+.worksContainer ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.worksContainer li {
+    background: #222831;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.worksContainer img {
+    width: 300px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, rotate 0.3s ease-in-out;
+}
+
+.worksContainer img:hover {
+    transform: scale(1.1) rotate(-3deg);
+}
+
+.worksContainer img:active {
+    transform: scale(0.9);
+}
+
+/* 🔹 قسم التواصل */
+.contactContainer {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.email a {
+    text-decoration: none;
+    color: #00adb5;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.email a:hover {
+    color: #008a99;
+    text-shadow: 0px 0px 5px rgba(0, 173, 181, 0.8);
+}
+
+/* 🔹 وسائل التواصل */
+.socialMedia {
+    margin-top: 1.5rem;
+}
+
+.socialMedia a img {
+    width: 40px;
+    margin: 0 10px;
+    transition: transform 0.3s ease-in-out, rotate 0.3s ease-in-out;
+}
+
+.socialMedia a img:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.socialMedia a img:active {
+    transform: scale(0.9);
+}
+
+/* 🔹 الفوتر */
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 14px;
+    background-color: #181b20;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 🔹 تصميم متجاوب */
 @media (max-width: 1023px) {
     header {
-      margin-left: 1rem;
-      margin-right: 1rem;
-    }
-    .hero {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-    .heroImg {
-      width: 400px;
-    }
-    .name,
-    .title {
-      font-size: 2rem;
-    }
-    .arrow {
-      display: none;
-    }
-    .aboutMe {
-      flex-direction: column-reverse;
-      align-items: center;
-      gap: 2rem;
-    }
-    .textContainer {
-      align-items: center;
-      margin: 0rem 5rem;
-      gap: 1rem;
-    }
-    .aboutName,
-    .aboutTitle {
-      font-size: 2rem;
-    }
-    .light {
-      width: 60px;
-    }
-    .aboutMeImg {
-      width: 400px;
-    }
-    .worksContainer {
-      padding: 5rem 0rem;
-      gap: 3rem;
-    }
-    .projectTitle {
-      margin-left: 1rem;
+        padding: 1rem 2rem;
     }
 
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
     }
-  
+
+    .heroImg {
+        width: 300px;
+    }
+
+    .aboutMe {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .aboutMeImg {
+        width: 300px;
+    }
+
+    .aboutMePar {
+        margin: 0 1rem;
+    }
+
+    .worksContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+}

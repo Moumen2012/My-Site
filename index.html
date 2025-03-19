@@ -10,11 +10,12 @@
     <div class="container"></div>
     <header>
       <img src="assets/svg/logo.svg" alt="Moumen logo" />
-      
+      <nav class="navigation">
+        <ul> <!-- تصحيح هنا -->
           <li><a href="#aboutMe">About Me</a></li>
           <li><a href="#MyWorks">My Works</a></li>
           <li><a href="#contactMe">Contact</a></li>
-        </ul>
+        </ul> <!-- إغلاق صحيح -->
       </nav>
     </header>
     <hr />
@@ -24,24 +25,18 @@
       <div class="heroSub">
         <h1 class="name">I’m Moumen</h1>
         <h1 class="title">Software Engineer</h1>
-        <div class="heroBtns">
-
-        </div>
+        <div class="heroBtns"></div>
       </div>
       <img src="assets/svg/Hero.svg" alt="hero image" class="heroImg" />
     </section>
 
     <section class="aboutMe" id="aboutMe">
-      <img
-        src="assets/svg/AboutMe.svg"
-        alt="aboutMe image"
-        class="aboutMeImg"
-      />
+      <img src="assets/svg/AboutMe.svg" alt="aboutMe image" class="aboutMeImg" />
       <div class="textContainer">
         <div class="textTitle">
           <h1 class="aboutName">About</h1>
           <h1 class="aboutTitle">me</h1>
-          <img src="assets/svg/lightbulb.svg" alt="ligh" class="light" />
+          <img src="assets/svg/lightbulb.svg" alt="light" class="light" />
         </div>
         <p class="aboutMePar">
           Hey, I'm Moumen, a Software Engineer who loves turning complex ideas into simple, sleek solutions. Currently diving into mobile app development to level up my skills. I enjoy building cool stuff, experimenting with new tech, and making things look and feel great.
@@ -55,15 +50,12 @@
           <h1 class="aboutName">My recent</h1>
           <h1 class="aboutTitle">works</h1>
         </div>
-        <ul>
+        <ul class="worksList"> <!-- أضفت كلاس لأغراض CSS -->
           <li>
-            <a href=""
-              ><img src="assests/imgs/landingPage.png" alt="landing Page"
-            /></a>
+            <a href=""><img src="assets/imgs/landingPage.png" alt="landing Page" /></a>
           </li>
           <li>
-            <a href=""
-            ><img src="assets/imgs/webApp.png" alt="Wep App" /></a>
+            <a href=""><img src="assets/imgs/webApp.png" alt="Web App" /></a>
           </li>
           <li>
             <a href=""><img src="assets/imgs/app.png" alt="App" /></a>
@@ -80,22 +72,21 @@
       <div class="contact">
         <div class="email">
           <img src="assets/svg/Email.svg" alt="email logo" />
-          <a href="mailto:bramoumen6202@gmail.com"
-            ><h3>bramoumen6@gmail.com</h3></a
-          >
+          <a href="mailto:bramoumen6202@gmail.com">
+            <h3>bramoumen6202@gmail.com</h3> <!-- تأكد من صحة البريد -->
+          </a>
         </div>
-
       </div>
       <div class="socialMedia">
-        <a href="https://github.com/Moumen2012" target="_blank"
-          ><img src="assets/svg/github.svg" alt=" my github account"
-        /></a>
-        /></a>
+        <a href="https://github.com/Moumen2012" target="_blank">
+          <img src="assets/svg/github.svg" alt="my github account" />
+        </a>
       </div>
     </section>
+
     <hr />
     <footer>
-      <p>This is evrything</p>
+      <p>This is everything</p>
     </footer>
   </body>
 </html>
