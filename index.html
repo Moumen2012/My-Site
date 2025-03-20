@@ -35,11 +35,11 @@
       <div class="textContainer">
         <div class="textTitle">
           <h1 class="aboutName">About</h1>
-          <h1 class="aboutTitle">me</h1>
+          <h1 class="aboutTitle">Me</h1>
           <img src="assets/svg/lightbulb.svg" alt="light" class="light" />
         </div>
         <p class="aboutMePar">
-          Hey, I'm Moumen, a Software Engineer who loves turning complex ideas into simple, sleek solutions. Currently diving into mobile app development to level up my skills. I enjoy building cool stuff, experimenting with new tech, and making things look and feel great.
+          Hey, I'm Moumen, a passionate Software Engineer who thrives on transforming complex ideas into elegant, user-friendly solutions. Currently honing my skills in mobile app development, I'm always eager to explore new technologies, push creative boundaries, and craft seamless digital experiences.
         </p>
       </div>
     </section>
@@ -47,8 +47,8 @@
     <section class="works" id="MyWorks">
       <div class="worksContainer">
         <div class="projectTitle">
-          <h1 class="aboutName">My recent</h1>
-          <h1 class="aboutTitle">works</h1>
+          <h1 class="aboutName">My Recent</h1>
+          <h1 class="aboutTitle">Works</h1>
         </div>
         <ul class="worksList"> <!-- أضفت كلاس لأغراض CSS -->
           <li>
@@ -67,7 +67,7 @@
     <section class="contactContainer" id="contactMe">
       <div class="contactTitle">
         <h1 class="aboutName">Contact</h1>
-        <h1 class="aboutTitle">me</h1>
+        <h1 class="aboutTitle">Me</h1>
       </div>
       <div class="contact">
         <div class="email">
@@ -90,3 +90,21 @@
     </footer>
   </body>
 </html>
+
+<script>
+  document.querySelectorAll('.navigation a').forEach(link => {
+      link.addEventListener('click', function(event) {
+          event.preventDefault(); // يمنع تغيير الرابط في شريط العناوين
+          const targetId = this.getAttribute('href').substring(1);
+          const targetSection = document.getElementById(targetId);
+  
+          if (targetSection) {
+              window.scrollTo({
+                  top: targetSection.offsetTop - 50, // تعديل المسافة لتناسب الهيدر
+                  behavior: 'smooth' // تنقل سلس
+              });
+          }
+      });
+  });
+  </script>
+  
