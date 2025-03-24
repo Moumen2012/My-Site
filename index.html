@@ -1,110 +1,795 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Moumen</title>
-  </head>
-  <body>
-    <div class="container"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moumen - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: "Poppins", sans-serif;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body {
+            background-color: #1b1f24;
+            color: #eeeeee;
+            padding-top: 70px;
+            word-wrap: break-word;
+            overflow-x: hidden;
+        }
+
+        /* 🔹 Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background-color: #1b1f24;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        header:hover {
+            box-shadow: 0 5px 15px rgba(0, 173, 181, 0.2);
+        }
+
+        header img {
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        header img:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .navigation ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .navigation a {
+            color: #eeeeee;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .navigation a:hover {
+            color: #00adb5;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #00adb5;
+            transition: width 0.3s;
+        }
+
+        .navigation a:hover::after {
+            width: 100%;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: rgba(238, 238, 238, 0.1);
+            margin: 0 5%;
+        }
+
+        /* 🔹 Section Styles */
+        .section {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        /* 🔹 Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+            margin: 5rem auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .heroSub {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #eeeeee;
+            transition: all 0.3s;
+        }
+
+        .name:hover {
+            color: #00adb5;
+            text-shadow: 0 0 10px rgba(0, 173, 181, 0.5);
+        }
+
+        .title {
+            font-size: 2rem;
+            color: #00adb5;
+            transition: all 0.3s;
+        }
+
+        .title:hover {
+            transform: scale(1.05);
+        }
+
+        .heroImg {
+            max-width: 450px;
+            width: 100%;
+            transition: transform 0.5s;
+        }
+
+        .heroImg:hover {
+            transform: translateY(-10px) rotate(2deg);
+        }
+
+        /* 🔹 About Me Section */
+        .aboutMe {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+            margin: 5rem auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .aboutMeImg {
+            max-width: 450px;
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.5s;
+        }
+
+        .aboutMeImg:hover {
+            transform: scale(1.03) rotate(-1deg);
+        }
+
+        .textContainer {
+            max-width: 600px;
+        }
+
+        .textTitle {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .aboutName {
+            font-size: 2.5rem;
+            color: #eeeeee;
+            transition: all 0.3s;
+        }
+
+        .aboutName:hover {
+            color: #00adb5;
+        }
+
+        .aboutTitle {
+            font-size: 2.5rem;
+            color: #00adb5;
+            transition: all 0.3s;
+        }
+
+        .aboutTitle:hover {
+            transform: scale(1.05);
+        }
+
+        .light {
+            height: 30px;
+            transition: transform 0.5s;
+        }
+
+        .light:hover {
+            transform: rotate(20deg) scale(1.2);
+        }
+
+        .aboutMePar {
+            color: rgba(238, 238, 238, 0.75);
+            line-height: 1.6;
+            transition: all 0.3s;
+        }
+
+        .aboutMePar:hover {
+            color: rgba(238, 238, 238, 0.9);
+        }
+
+        /* 🔹 Works Section */
+        .works {
+            margin: 5rem auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .projectTitle {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #222831;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 173, 181, 0.3);
+        }
+
+        .project-image-container {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+
+        .project-card:hover .project-image-container img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: #eeeeee;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover .project-content h3 {
+            color: #00adb5;
+        }
+
+        .project-content p {
+            color: rgba(238, 238, 238, 0.7);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover .project-content p {
+            color: rgba(238, 238, 238, 0.9);
+        }
+
+        .project-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-link {
+            color: #00adb5;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .project-link::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .project-link:hover {
+            color: #008a99;
+        }
+
+        .project-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-links a {
+            color: #eeeeee;
+            transition: all 0.3s;
+        }
+
+        .project-links a:hover {
+            color: #00adb5;
+            transform: scale(1.2);
+        }
+
+        /* 🔹 Contact Section */
+        .contactContainer {
+            text-align: center;
+            padding: 4rem 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .contactTitle {
+            margin-bottom: 2rem;
+        }
+
+        .email {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .email:hover {
+            transform: scale(1.05);
+        }
+
+        .email img {
+            height: 24px;
+            transition: transform 0.3s;
+        }
+
+        .email:hover img {
+            transform: rotate(10deg);
+        }
+
+        .email a {
+            color: #00adb5;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .email:hover a {
+            color: #008a99;
+            text-shadow: 0 0 5px rgba(0, 138, 153, 0.3);
+        }
+
+        .socialMedia {
+            margin-top: 1.5rem;
+        }
+
+        .socialMedia a {
+            display: inline-block;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        .socialMedia a:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .socialMedia img {
+            height: 30px;
+        }
+
+        /* 🔹 Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #00adb5;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            background-color: #008a99;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(0, 138, 153, 0.4);
+        }
+
+        /* 🔹 Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 14px;
+            background-color: #181b20;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        footer:hover {
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 🔹 Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 🔹 Responsive Design */
+        @media (max-width: 1024px) {
+            .hero, .aboutMe {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .textTitle {
+                justify-content: center;
+            }
+
+            .heroSub, .textContainer {
+                align-items: center;
+            }
+
+            .aboutMePar {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navigation ul {
+                gap: 1rem;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .aboutName, .aboutTitle {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem;
+            }
+
+            .navigation ul {
+                gap: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .title {
+                font-size: 1.2rem;
+            }
+
+            .aboutName, .aboutTitle {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
     <header>
-      <img src="assets/svg/logo.svg" alt="Moumen logo" />
-      <nav class="navigation">
-        <ul> <!-- تصحيح هنا -->
-          <li><a href="#aboutMe">About Me</a></li>
-          <li><a href="#MyWorks">My Works</a></li>
-          <li><a href="#contactMe">Contact</a></li>
-        </ul> <!-- إغلاق صحيح -->
-      </nav>
+        <img src="assets/svg/logo.svg" alt="Moumen logo">
+        <nav class="navigation">
+            <ul>
+                <li><a href="#aboutMe">About Me</a></li>
+                <li><a href="#MyWorks">My Works</a></li>
+                <li><a href="#contactMe">Contact</a></li>
+            </ul>
+        </nav>
     </header>
-    <hr />
+    <hr>
 
     <section class="hero">
-      <img class="arrow" src="assets/svg/arrow.svg" alt="arrow" />
-      <div class="heroSub">
-        <h1 class="name">I’m Moumen</h1>
-        <h1 class="title">Software Engineer</h1>
-        <div class="heroBtns"></div>
-      </div>
-      <img src="assets/svg/Hero.svg" alt="hero image" class="heroImg" />
+        <div class="heroSub">
+            <h1 class="name">I'm Moumen</h1>
+            <h1 class="title">Software Engineer</h1>
+        </div>
+        <img src="assets/svg/Hero.svg" alt="Illustration of a software engineer" class="heroImg">
     </section>
 
     <section class="aboutMe" id="aboutMe">
-      <img src="assets/svg/AboutMe.svg" alt="aboutMe image" class="aboutMeImg" />
-      <div class="textContainer">
-        <div class="textTitle">
-          <h1 class="aboutName">About</h1>
-          <h1 class="aboutTitle">Me</h1>
-          <img src="assets/svg/lightbulb.svg" alt="light" class="light" />
+        <img src="assets/svg/AboutMe.svg" alt="About me illustration" class="aboutMeImg">
+        <div class="textContainer">
+            <div class="textTitle">
+                <h1 class="aboutName">About</h1>
+                <h1 class="aboutTitle">Me</h1>
+                <img src="assets/svg/lightbulb.svg" alt="lightbulb icon" class="light">
+            </div>
+            <p class="aboutMePar">
+                Hey, I'm Moumen, a passionate Software Engineer who thrives on transforming complex ideas into elegant, user-friendly solutions. Currently honing my skills in mobile app development, I'm always eager to explore new technologies, push creative boundaries, and craft seamless digital experiences.
+            </p>
         </div>
-        <p class="aboutMePar">
-          Hey, I'm Moumen, a passionate Software Engineer who thrives on transforming complex ideas into elegant, user-friendly solutions. Currently honing my skills in mobile app development, I'm always eager to explore new technologies, push creative boundaries, and craft seamless digital experiences.
-        </p>
-      </div>
     </section>
 
     <section class="works" id="MyWorks">
-      <div class="worksContainer">
-        <div class="projectTitle">
-          <h1 class="aboutName">My Recent</h1>
-          <h1 class="aboutTitle">Works</h1>
+        <div class="section">
+            <div class="projectTitle">
+                <h1 class="aboutName">My Recent</h1>
+                <h1 class="aboutTitle">Works</h1>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 - UI/UX Design -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="assets/imgs/landingPage.png" alt="UI/UX Design Project">
+                    </div>
+                    <div class="project-content">
+                        <h3>LEARN UI/UX DESIGN</h3>
+                        <p>Modern design for online learning platform with interactive components</p>
+                        <div class="project-actions">
+                            <a href="#" class="project-link">View Project</a>
+                            <div class="project-links">
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 - Web App -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="assets/imgs/webApp.png" alt="Web App Project">
+                    </div>
+                    <div class="project-content">
+                        <h3>WEB APPLICATION</h3>
+                        <p>Responsive web application with modern dashboard interface</p>
+                        <div class="project-actions">
+                            <a href="#" class="project-link">View Project</a>
+                            <div class="project-links">
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 - Mobile App -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="assets/imgs/app.png" alt="Mobile App Project">
+                    </div>
+                    <div class="project-content">
+                        <h3>MOBILE APPLICATION</h3>
+                        <p>Cross-platform mobile app with smooth animations and gestures</p>
+                        <div class="project-actions">
+                            <a href="#" class="project-link">View Project</a>
+                            <div class="project-links">
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <ul class="worksList"> <!-- أضفت كلاس لأغراض CSS -->
-          <li>
-            <a href=""><img src="assets/imgs/landingPage.png" alt="landing Page" /></a>
-          </li>
-          <li>
-            <a href=""><img src="assets/imgs/webApp.png" alt="Web App" /></a>
-          </li>
-          <li>
-            <a href=""><img src="assets/imgs/app.png" alt="App" /></a>
-          </li>
-        </ul>
-      </div>
     </section>
-
-    <section class="contactContainer" id="contactMe">
-      <div class="contactTitle">
-        <h1 class="aboutName">Contact</h1>
-        <h1 class="aboutTitle">Me</h1>
-      </div>
-      <div class="contact">
-        <div class="email">
-          <img src="assets/svg/Email.svg" alt="email logo" />
-          <a href="mailto:bramoumen6202@gmail.com">
-            <h3>bramoumen6202@gmail.com</h3> <!-- تأكد من صحة البريد -->
-          </a>
-        </div>
-      </div>
-      <div class="socialMedia">
-        <a href="https://github.com/Moumen2012" target="_blank">
-          <img src="assets/svg/github.svg" alt="my github account" />
-        </a>
-      </div>
-    </section>
-
-    <hr />
-    <footer>
-      <p>This is everything</p>
-    </footer>
-  </body>
-</html>
-
-<script>
-  document.querySelectorAll('.navigation a').forEach(link => {
-      link.addEventListener('click', function(event) {
-          event.preventDefault(); // يمنع تغيير الرابط في شريط العناوين
-          const targetId = this.getAttribute('href').substring(1);
-          const targetSection = document.getElementById(targetId);
-  
-          if (targetSection) {
-              window.scrollTo({
-                  top: targetSection.offsetTop - 50, // تعديل المسافة لتناسب الهيدر
-                  behavior: 'smooth' // تنقل سلس
-              });
-          }
-      });
-  });
-  </script>
-  
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Moumen - Portfolio</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            /* ... (ابق على جميع أنماط CSS السابقة كما هي) ... */
+    
+            /* 🔹 أنماط قسم الاتصال المحسنة */
+            .contactContainer {
+                text-align: center;
+                padding: 5rem 2rem;
+                background-color: #222831;
+                border-radius: 15px;
+                max-width: 800px;
+                margin: 5rem auto;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+    
+            .contactTitle {
+                margin-bottom: 3rem;
+            }
+    
+            .contactTitle h1 {
+                display: inline-block;
+                margin: 0 5px;
+            }
+    
+            .email-box {
+                display: inline-flex;
+                align-items: center;
+                gap: 1rem;
+                background: #1b1f24;
+                padding: 1rem 2rem;
+                border-radius: 50px;
+                margin-bottom: 2rem;
+                transition: all 0.3s;
+            }
+    
+            .email-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 173, 181, 0.2);
+            }
+    
+            .email-icon {
+                height: 24px;
+                width: 24px;
+            }
+    
+            .email-link {
+                color: #00adb5;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1.1rem;
+                transition: color 0.3s;
+            }
+    
+            .email-link:hover {
+                color: #eeeeee;
+            }
+    
+            .contact-form {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                max-width: 500px;
+                margin: 2rem auto;
+            }
+    
+            .contact-form input,
+            .contact-form textarea {
+                padding: 1rem;
+                border: none;
+                border-radius: 8px;
+                background: #1b1f24;
+                color: #eeeeee;
+                font-family: "Poppins", sans-serif;
+                transition: all 0.3s;
+            }
+    
+            .contact-form input:focus,
+            .contact-form textarea:focus {
+                outline: none;
+                box-shadow: 0 0 0 2px #00adb5;
+            }
+    
+            .contact-form textarea {
+                height: 150px;
+                resize: vertical;
+            }
+    
+            .submit-btn {
+                background: #00adb5;
+                color: white;
+                border: none;
+                padding: 1rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s;
+            }
+    
+            .submit-btn:hover {
+                background: #008a99;
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 173, 181, 0.3);
+            }
+    
+            .social-media {
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+    
+            .social-link {
+                color: #eeeeee;
+                font-size: 1.8rem;
+                transition: all 0.3s;
+            }
+    
+            .social-link:hover {
+                color: #00adb5;
+                transform: scale(1.2);
+            }
+    
+            /* ... (ابق على باقي أنماط CSS كما هي) ... */
+        </style>
+    </head>
+    <body>
+        <!-- ... (ابق على بقية HTML كما هي) ... -->
+    
+        <section class="contactContainer" id="contactMe">
+            <div class="contactTitle">
+                <h1 class="aboutName">Contact</h1>
+                <h1 class="aboutTitle">Me</h1>
+            </div>
+            
+            <div class="email-box">
+                <i class="fas fa-envelope email-icon"></i>
+                <a href="mailto:bramoumen6202@gmail.com" class="email-link">bramoumen6202@gmail.com</a>
+            </div>
+            
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+            
+            <div class="social-media">
+                <a href="https://github.com/Moumen2012" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" class="social-link" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </section>
+    
+        <!-- ... (ابق على بقية HTML كما هي) ... -->
+    </body>
+    </html>

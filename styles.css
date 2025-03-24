@@ -13,57 +13,47 @@
 body {
     background-color: #1b1f24;
     color: #eeeeee;
+    padding-top: 70px; /* تعويض الهيدر الثابت */
+    word-wrap: break-word;
+    overflow-x: hidden;
 }
 
 /* 🔹 الهيدر */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 5%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
 
-/* 🔹 قائمة التنقل */
-.navigation ul {
-    display: flex;
-    list-style-type: none;
-    gap: 2rem;
-}
-
-.navigation a {
-    text-decoration: none;
-    color: #eeeeee;
-    font-weight: bold;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.navigation a:hover {
-    color: #00adb5;
-    text-shadow: 0px 0px 10px rgba(0, 173, 181, 0.8);
-    transform: scale(1.1);
-}
-
-hr {
-    opacity: 0.1;
-}
-
-/* 🔹 تأثير على جميع الصور */
+/* 🔹 تحسين الصور */
 img {
-    transition: transform 0.3s ease-in-out, rotate 0.3s ease-in-out;
+    transition: transform 0.3s, rotate 0.3s;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 img:hover {
-    transform: scale(1.1) rotate(3deg);
+    transform: scale(1.05);
 }
 
-img:active {
-    transform: scale(0.9);
+/* 🔹 أقسام الموقع */
+.section {
+    max-width: 1200px;
+    margin: 5rem auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* 🔹 تحسين عرض الصور داخل الحاويات */
+.image-container {
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
 }
 
 /* 🔹 قسم الهيرو */
@@ -73,13 +63,15 @@ img:active {
     align-items: center;
     margin: 5rem auto;
     max-width: 1200px;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .heroSub {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
 .heroSub:hover {
@@ -91,7 +83,7 @@ img:active {
     font-size: 3rem;
     font-weight: bold;
     color: #eeeeee;
-    transition: color 0.3s ease-in-out;
+    transition: color 0.3s;
 }
 
 .name:hover {
@@ -101,7 +93,7 @@ img:active {
 .title {
     font-size: 2rem;
     color: #00adb5;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s;
 }
 
 .title:hover {
@@ -116,12 +108,13 @@ img:active {
     max-width: 1200px;
     margin: 5rem auto;
     gap: 3rem;
+    flex-wrap: wrap;
 }
 
 .textContainer {
     flex: 1;
     text-align: left;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
 .textContainer:hover {
@@ -132,7 +125,7 @@ img:active {
 .aboutName {
     color: #eeeeee;
     font-size: 2.5rem;
-    transition: color 0.3s ease-in-out;
+    transition: color 0.3s;
 }
 
 .aboutName:hover {
@@ -142,7 +135,7 @@ img:active {
 .aboutTitle {
     color: #00adb5;
     font-size: 2.5rem;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s;
 }
 
 .aboutTitle:hover {
@@ -152,7 +145,7 @@ img:active {
 .aboutMePar {
     text-align: justify;
     color: rgba(238, 238, 238, 0.75);
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s;
 }
 
 .aboutMePar:hover {
@@ -184,7 +177,7 @@ img:active {
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s;
 }
 
 .worksContainer li:hover {
@@ -195,9 +188,18 @@ img:active {
 .contactContainer {
     text-align: center;
     padding: 4rem 0;
+    overflow: hidden;
+}
+
+.email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .email a {
+    display: inline-block;
     text-decoration: none;
     color: #00adb5;
     font-weight: bold;
@@ -206,12 +208,45 @@ img:active {
 
 .email a:hover {
     color: #008a99;
-    text-shadow: 0px 0px 5px rgba(0, 173, 181, 0.8);
 }
 
 /* 🔹 وسائل التواصل */
 .socialMedia {
     margin-top: 1.5rem;
+}
+
+.socialMedia a {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.socialMedia a:hover {
+    transform: scale(1.1);
+}
+
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#backToTop:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
 }
 
 /* 🔹 الفوتر */
@@ -223,41 +258,133 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 🔹 تصميم متجاوب */
-@media (max-width: 1023px) {
+/* 🔹 تحسين الريسبونسف */
+@media (max-width: 1024px) {
     header {
         padding: 1rem 2rem;
     }
 
-    .hero {
+    .hero, .aboutMe {
         flex-direction: column;
         text-align: center;
         gap: 2rem;
+        padding: 2rem;
     }
 
-    .heroImg {
-        width: 300px;
+    .textContainer {
+        max-width: 90%;
+        text-align: center;
     }
 
-    .aboutMe {
-        flex-direction: row;
-        gap: 1rem;
-    }
-
-    .aboutMeImg {
-        width: 300px;
+    .aboutName, .aboutTitle {
+        font-size: 2rem;
     }
 
     .aboutMePar {
-        margin: 0 1rem;
-    }
-
-    .worksContainer {
-        flex-direction: column;
-        align-items: center;
+        font-size: 1rem;
     }
 }
+/* 🔹 Contact Section */
+.contactContainer {
+    text-align: center;
+    padding: 5rem 2rem;
+    background-color: #222831;
+    border-radius: 15px;
+    margin: 5rem auto;
+    max-width: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
 
-html, body {
-    overflow-x: hidden;
+.contactTitle {
+    margin-bottom: 3rem;
+}
+
+.emailBox {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: #1b1f24;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    transition: transform 0.3s;
+}
+
+.emailBox:hover {
+    transform: translateY(-5px);
+}
+
+.emailIcon {
+    height: 24px;
+    width: 24px;
+}
+
+.emailLink {
+    color: #00adb5;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.emailLink:hover {
+    color: #eeeeee;
+}
+
+.socialMedia {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.socialLink {
+    color: #eeeeee;
+    font-size: 1.8rem;
+    transition: all 0.3s;
+}
+
+.socialLink:hover {
+    color: #00adb5;
+    transform: scale(1.2);
+}
+
+/* نموذج الاتصال (اختياري) */
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.contactForm input,
+.contactForm textarea {
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #1b1f24;
+    color: #eeeeee;
+    font-family: "Poppins", sans-serif;
+}
+
+.contactForm textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.contactForm button {
+    background: #00adb5;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.contactForm button:hover {
+    background: #008a99;
+    transform: translateY(-3px);
 }
