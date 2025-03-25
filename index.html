@@ -599,12 +599,56 @@
             box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* 🔹 Toggle Switch */
-        .theme-toggle {
+        /* 🔹 Toggle Switch - Improved */
+        .theme-toggle-container {
             display: flex;
             align-items: center;
             margin-left: 20px;
+        }
+
+        .theme-toggle {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .theme-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
             cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        body.light-mode .toggle-slider {
+            background-color: #00adb5;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        body.light-mode .toggle-slider:before {
+            transform: translateX(30px);
         }
 
         .toggle-icon {
@@ -618,33 +662,21 @@
             color: #333333;
         }
 
-        .toggle-switch {
-            position: relative;
-            width: 50px;
-            height: 24px;
-            background-color: #333;
-            border-radius: 12px;
+        /* 🔹 Burger Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-toggle i {
+            font-size: 1.8rem;
+            color: #eeeeee;
             transition: all 0.3s;
         }
 
-        body.light-mode .toggle-switch {
-            background-color: #00adb5;
-        }
-
-        .toggle-switch::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #fff;
-            top: 2px;
-            left: 2px;
-            transition: all 0.3s;
-        }
-
-        body.light-mode .toggle-switch::before {
-            left: 28px;
+        body.light-mode .menu-toggle i {
+            color: #333333;
         }
 
         /* 🔹 Responsive Design */
@@ -706,6 +738,46 @@
             .heroImg, .aboutMeImg {
                 max-width: 85%;
             }
+
+            /* Navigation for mobile */
+            .menu-toggle {
+                display: block;
+            }
+
+            .navigation {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: #1b1f24;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                z-index: 100;
+                padding-top: 80px;
+            }
+
+            body.light-mode .navigation {
+                background-color: #ffffff;
+            }
+
+            .navigation.active {
+                right: 0;
+            }
+
+            .navigation ul {
+                flex-direction: column;
+                gap: 2rem;
+                width: 100%;
+                padding: 0 2rem;
+            }
+
+            .theme-toggle-container {
+                margin: 2rem 0;
+            }
         }
 
         @media (max-width: 576px) {
@@ -733,8 +805,22 @@
                 height: 25px;
             }
 
-            .theme-toggle {
+            .theme-toggle-container {
                 margin-left: 10px;
+            }
+
+            .theme-toggle {
+                width: 50px;
+                height: 25px;
+            }
+
+            .toggle-slider:before {
+                height: 18px;
+                width: 18px;
+            }
+
+            body.light-mode .toggle-slider:before {
+                transform: translateX(25px);
             }
         }
 
@@ -755,23 +841,46 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
+
+            .theme-toggle {
+                width: 45px;
+                height: 22px;
+            }
+
+            .toggle-slider:before {
+                height: 16px;
+                width: 16px;
+            }
+
+            body.light-mode .toggle-slider:before {
+                transform: translateX(23px);
+            }
+
+            .toggle-icon {
+                font-size: 1rem;
+                margin: 0 5px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <img src="assets/svg/logo.svg" alt="Moumen logo">
-        <nav class="navigation">
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="navigation" id="navigation">
             <ul>
                 <li><a href="#aboutMe">About Me</a></li>
                 <li><a href="#MyWorks">My Works</a></li>
                 <li><a href="#contactMe">Contact</a></li>
-                <li>
-                    <div class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-sun toggle-icon"></i>
-                        <div class="toggle-switch"></div>
-                        <i class="fas fa-moon toggle-icon"></i>
-                    </div>
+                <li class="theme-toggle-container">
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <label class="theme-toggle">
+                        <input type="checkbox" id="themeCheckbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <i class="fas fa-moon toggle-icon"></i>
                 </li>
             </ul>
         </nav>
@@ -876,11 +985,21 @@
             <a href="mailto:bramoumen6202@gmail.com" class="email-link">bramoumen6202@gmail.com</a>
         </div>
         
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
+        <form class="contact-form" action="contact.php" method="POST">
+            <!-- حقل الاسم -->
+            <input type="text" name="name" placeholder="Your Name" required>
+            
+            <!-- حقل البريد الإلكتروني -->
+            <input type="email" name="email" placeholder="Your Email" required>
+            
+            <!-- حقل الرسالة -->
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            
+            <!-- زر الإرسال -->
             <button type="submit" class="submit-btn">Send Message</button>
+            
+            <!-- رسالة النجاح (اختيارية) -->
+            <div id="form-message" style="display:none; margin-top:15px; color:green;"></div>
         </form>
         
         <div class="social-media">
@@ -899,7 +1018,7 @@
     <button id="backToTop" aria-label="Back to top">↑</button>
 
     <footer>
-        <p>© 2023 Moumen. All rights reserved.</p>
+        <p>© 2025 Moumen. All rights reserved.</p>
     </footer>
 
     <script>
@@ -922,16 +1041,17 @@
         });
 
         // Theme Toggle Functionality
-        const themeToggle = document.getElementById('themeToggle');
+        const themeCheckbox = document.getElementById('themeCheckbox');
         const body = document.body;
         
-        // Check for saved user preference, if any, on load of the website
+        // Check for saved user preference
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
-            body.classList.add(currentTheme);
+            body.classList.add('light-mode');
+            themeCheckbox.checked = true;
         }
         
-        themeToggle.addEventListener('click', () => {
+        themeCheckbox.addEventListener('change', () => {
             if (body.classList.contains('light-mode')) {
                 body.classList.remove('light-mode');
                 localStorage.setItem('theme', '');
@@ -939,6 +1059,54 @@
                 body.classList.add('light-mode');
                 localStorage.setItem('theme', 'light-mode');
             }
+        });
+
+        // Burger Menu Functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navigation = document.getElementById('navigation');
+        
+        menuToggle.addEventListener('click', () => {
+            navigation.classList.toggle('active');
+            menuToggle.innerHTML = navigation.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.navigation a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navigation.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Form Handling Code
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const formMessage = document.getElementById('form-message');
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => response.text())
+            .then(data => {
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'تم إرسال رسالتك بنجاح!';
+                formMessage.style.color = '#00adb5';
+                form.reset();
+                
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            })
+            .catch(error => {
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'حدث خطأ أثناء الإرسال!';
+                formMessage.style.color = '#ff3333';
+            });
         });
     </script>
 </body>
