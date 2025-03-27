@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moumen - Portfolio</title>
+    <meta name="description" content="Portfolio of Moumen, a passionate Software Engineer specializing in mobile app development">
+    <meta name="keywords" content="software engineer, mobile developer, portfolio, Moumen">
+    <meta property="og:title" content="Moumen - Portfolio">
+    <meta property="og:description" content="Portfolio of Moumen, a passionate Software Engineer">
+    <meta property="og:image" content="assets/imgs/og-image.jpg">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
@@ -16,6 +25,18 @@
             font-family: "Poppins", sans-serif;
             user-select: none;
             -webkit-user-drag: none;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00adb5, #0081a7);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.1s;
         }
 
         body {
@@ -30,6 +51,48 @@
         body.light-mode {
             background-color: #f5f5f5;
             color: #333333;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1b1f24;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-circle {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 173, 181, 0.2);
+            border-radius: 50%;
+            border-top-color: #00adb5;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            color: #00adb5;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* 🔹 Header Styles */
@@ -230,6 +293,40 @@
             color: rgba(51, 51, 51, 0.85);
         }
 
+        /* Skills Section */
+        .skills-container {
+            margin-top: 3rem;
+        }
+
+        .skill {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: rgba(238, 238, 238, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        body.light-mode .skill-bar {
+            background: rgba(51, 51, 51, 0.1);
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00adb5, #0081a7);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
         /* 🔹 Animations */
         @keyframes fadeIn {
             from {
@@ -267,6 +364,28 @@
             to {
                 opacity: 1;
                 transform: translateX(0);
+            }
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
             }
         }
 
@@ -308,6 +427,7 @@
         .project-image-container {
             height: 220px;
             overflow: hidden;
+            position: relative;
         }
 
         .project-image-container img {
@@ -319,6 +439,19 @@
 
         .project-card:hover .project-image-container img {
             transform: scale(1.1);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #00adb5;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
         }
 
         .project-content {
@@ -517,6 +650,8 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
         .submit-btn:hover {
@@ -550,34 +685,63 @@
         /* 🔹 Back to Top Button */
         #backToTop {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
             background-color: #00adb5;
             color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 20px;
-            box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
-            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 173, 181, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
+            transform: translateY(20px);
+            z-index: 99;
+            outline: none;
         }
 
         #backToTop.show {
             opacity: 1;
             visibility: visible;
+            transform: translateY(0);
         }
 
         #backToTop:hover {
             background-color: #008a99;
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 20px rgba(0, 138, 153, 0.4);
+            box-shadow: 0 6px 25px rgba(0, 138, 153, 0.4);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        #backToTop:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        #backToTop svg {
+            transition: transform 0.3s;
+        }
+
+        #backToTop:hover svg {
+            transform: translateY(-2px);
+        }
+
+        body.light-mode #backToTop {
+            background-color: #00adb5;
+            color: #ffffff;
+        }
+
+        body.light-mode #backToTop:hover {
+            background-color: #008a99;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.05); }
         }
 
         /* 🔹 Footer */
@@ -679,7 +843,73 @@
             color: #333333;
         }
 
-        /* 🔹 Responsive Design */
+        /* Particle JS Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Achievement Badges */
+        .badge-container {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            z-index: 90;
+        }
+
+        .badge {
+            width: 50px;
+            height: 50px;
+            background: #00adb5;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge:hover {
+            transform: scale(1.1);
+        }
+
+        .badge i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .badge-tooltip {
+            position: absolute;
+            left: 70px;
+            background: #222831;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        body.light-mode .badge-tooltip {
+            background: #ffffff;
+            color: #333333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge:hover .badge-tooltip {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
         @media (max-width: 1200px) {
             .hero, .aboutMe {
                 padding: 5% 5%;
@@ -715,6 +945,11 @@
 
             .textTitle {
                 justify-content: center;
+            }
+
+            .badge-container {
+                left: 15px;
+                bottom: 80px;
             }
         }
 
@@ -777,6 +1012,10 @@
 
             .theme-toggle-container {
                 margin: 2rem 0;
+            }
+
+            .badge-container {
+                display: none;
             }
         }
 
@@ -861,9 +1100,39 @@
                 margin: 0 5px;
             }
         }
+
+        /* Print Styles */
+        @media print {
+            body, body.light-mode {
+                background-color: white !important;
+                color: black !important;
+            }
+            
+            .navigation, .menu-toggle, #backToTop, footer, .badge-container {
+                display: none !important;
+            }
+            
+            a::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                font-weight: normal;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-circle"></div>
+        <div class="loading-text">Loading Portfolio...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Particles JS Background -->
+    <div id="particles-js"></div>
+
     <header>
         <img src="assets/svg/logo.svg" alt="Moumen logo">
         <div class="menu-toggle" id="menuToggle">
@@ -906,6 +1175,49 @@
             <p class="aboutMePar">
                 Hey, I'm Moumen, a passionate Software Engineer who thrives on transforming complex ideas into elegant, user-friendly solutions. Currently honing my skills in mobile app development, I'm always eager to explore new technologies, push creative boundaries, and craft seamless digital experiences.
             </p>
+
+            <!-- Skills Section -->
+            <div class="skills-container">
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="85%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="90%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>React</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="75%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>Node.js</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="80%"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -920,6 +1232,7 @@
                 <!-- Project 1 - UI/UX Design -->
                 <div class="project-card">
                     <div class="project-image-container">
+                        <span class="project-badge">UI/UX</span>
                         <img src="assets/imgs/landingPage.png" alt="UI/UX Design Project">
                     </div>
                     <div class="project-content">
@@ -938,6 +1251,7 @@
                 <!-- Project 2 - Web App -->
                 <div class="project-card">
                     <div class="project-image-container">
+                        <span class="project-badge">Web App</span>
                         <img src="assets/imgs/webApp.png" alt="Web App Project">
                     </div>
                     <div class="project-content">
@@ -956,6 +1270,7 @@
                 <!-- Project 3 - Mobile App -->
                 <div class="project-card">
                     <div class="project-image-container">
+                        <span class="project-badge">Mobile</span>
                         <img src="assets/imgs/app.png" alt="Mobile App Project">
                     </div>
                     <div class="project-content">
@@ -985,22 +1300,14 @@
             <a href="mailto:bramoumen6202@gmail.com" class="email-link">bramoumen6202@gmail.com</a>
         </div>
         
-        <form class="contact-form" action="contact.php" method="POST">
-            <!-- حقل الاسم -->
-            <input type="text" name="name" placeholder="Your Name" required>
-            
-            <!-- حقل البريد الإلكتروني -->
-            <input type="email" name="email" placeholder="Your Email" required>
-            
-            <!-- حقل الرسالة -->
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            
-            <!-- زر الإرسال -->
-            <button type="submit" class="submit-btn">Send Message</button>
-            
-            <!-- رسالة النجاح (اختيارية) -->
-            <div id="form-message" style="display:none; margin-top:15px; color:green;"></div>
-        </form>
+<!-- استخدم FormSubmit مباشرة في نموذجك -->
+<form class="contact-form" action="https://formsubmit.co/bramoumen6202@gmail.com" method="POST">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit" class="submit-btn">Send Message</button>
+</form>
         
         <div class="social-media">
             <a href="https://github.com/Moumen2012" class="social-link" target="_blank">
@@ -1015,36 +1322,106 @@
         </div>
     </section>
 
-    <button id="backToTop" aria-label="Back to top">↑</button>
+    <!-- Achievement Badges -->
+    <div class="badge-container">
+        <div class="badge">
+            <i class="fas fa-medal"></i>
+            <span class="badge-tooltip">Top Contributor 2023</span>
+        </div>
+        <div class="badge">
+            <i class="fas fa-code"></i>
+            <span class="badge-tooltip">100+ Projects</span>
+        </div>
+        <div class="badge">
+            <i class="fas fa-heart"></i>
+            <span class="badge-tooltip">Community Favorite</span>
+        </div>
+    </div>
+
+    <button id="backToTop" aria-label="Back to top" title="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
 
     <footer>
         <p>© 2025 Moumen. All rights reserved.</p>
     </footer>
 
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollProgress + '%';
+        });
+
         // Back to Top Button
         const backToTopButton = document.getElementById("backToTop");
-        
-        window.addEventListener("scroll", () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add("show");
-            } else {
-                backToTopButton.classList.remove("show");
+        let isScrolling = false;
+
+        function handleScroll() {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    const showPosition = window.innerHeight * 0.3;
+                    
+                    if (window.pageYOffset > showPosition) {
+                        backToTopButton.classList.add("show");
+                    } else {
+                        backToTopButton.classList.remove("show");
+                    }
+                    
+                    isScrolling = false;
+                });
+                isScrolling = true;
             }
+        }
+
+        let scrollTimeout;
+        window.addEventListener("scroll", () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(handleScroll, 50);
         });
-        
-        backToTopButton.addEventListener("click", () => {
+
+        backToTopButton.addEventListener("click", (e) => {
+            e.preventDefault();
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             });
+            
+            backToTopButton.style.animation = "bounce 0.5s";
+            setTimeout(() => {
+                backToTopButton.style.animation = "";
+            }, 500);
+        });
+
+        backToTopButton.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                backToTopButton.click();
+            }
         });
 
         // Theme Toggle Functionality
         const themeCheckbox = document.getElementById('themeCheckbox');
         const body = document.body;
         
-        // Check for saved user preference
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
             body.classList.add('light-mode');
@@ -1061,6 +1438,16 @@
             }
         });
 
+        // Auto Theme Based on Time
+        function updateThemeBasedOnTime() {
+            const hour = new Date().getHours();
+            if (hour > 6 && hour < 18 && !localStorage.getItem('theme')) {
+                body.classList.add('light-mode');
+                themeCheckbox.checked = true;
+            }
+        }
+        updateThemeBasedOnTime();
+
         // Burger Menu Functionality
         const menuToggle = document.getElementById('menuToggle');
         const navigation = document.getElementById('navigation');
@@ -1072,7 +1459,6 @@
                 : '<i class="fas fa-bars"></i>';
         });
 
-        // Close menu when clicking on a link
         const navLinks = document.querySelectorAll('.navigation a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -1081,31 +1467,223 @@
             });
         });
 
-        // Form Handling Code
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        // Form Handling with Ripple Effect
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = this;
             const formMessage = document.getElementById('form-message');
+            const submitBtn = form.querySelector('.submit-btn');
             
-            fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form)
-            })
-            .then(response => response.text())
-            .then(data => {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form)
+                });
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
                 formMessage.style.display = 'block';
-                formMessage.textContent = 'تم إرسال رسالتك بنجاح!';
+                formMessage.textContent = 'Message sent successfully!';
                 formMessage.style.color = '#00adb5';
                 form.reset();
+            } catch (error) {
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Error sending message. Please try again.';
+                formMessage.style.color = '#ff3333';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
                 
                 setTimeout(() => {
                     formMessage.style.display = 'none';
                 }, 5000);
-            })
-            .catch(error => {
-                formMessage.style.display = 'block';
-                formMessage.textContent = 'حدث خطأ أثناء الإرسال!';
-                formMessage.style.color = '#ff3333';
+            }
+        });
+
+        // Ripple Effect for Buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+            circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+            circle.classList.add("ripple-effect");
+
+            const ripple = button.getElementsByClassName("ripple-effect")[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        const buttons = document.getElementsByClassName("ripple");
+        for (const button of buttons) {
+            button.addEventListener("click", createRipple);
+        }
+
+        // Animate Skill Bars on Scroll
+        function animateSkills() {
+            const skills = document.querySelectorAll('.skill-progress');
+            skills.forEach(skill => {
+                const level = skill.getAttribute('data-level');
+                skill.style.width = level;
+            });
+        }
+
+        // Initialize Particles.js
+        function initParticles() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00adb5"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#00adb5",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        }
+
+        // Easter Egg - Konami Code
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    konamiIndex = 0;
+                    // Trigger Easter Egg
+                    document.body.style.animation = 'rainbow 5s linear infinite';
+                    setTimeout(() => {
+                        document.body.style.animation = '';
+                    }, 5000);
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // Rainbow Animation for Easter Egg
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            animateSkills();
+            initParticles();
+            
+            // Add scroll event listener for animations
+            window.addEventListener('scroll', function() {
+                animateSkills();
             });
         });
     </script>
