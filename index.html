@@ -327,6 +327,206 @@
             transition: width 1.5s ease;
         }
 
+        /* أنماط قسم المهارات الجديدة */
+        .skills-section {
+          background: rgba(34, 40, 49, 0.7);
+          padding: 4rem 2rem;
+          border-radius: 20px;
+          margin: 3rem auto;
+          max-width: 1200px;
+        }
+
+        body.light-mode .skills-section {
+          background: rgba(238, 238, 238, 0.7);
+        }
+
+        .section-header {
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+          font-size: 2.5rem;
+          color: #eeeeee;
+        }
+
+        body.light-mode .section-header h2 {
+          color: #333333;
+        }
+
+        .section-header h2 span {
+          color: #00adb5;
+        }
+
+        .section-header p {
+          color: rgba(238, 238, 238, 0.7);
+          font-size: 1.1rem;
+        }
+
+        body.light-mode .section-header p {
+          color: rgba(51, 51, 51, 0.7);
+        }
+
+        .skill-category {
+          background: #222831;
+          border-radius: 15px;
+          padding: 1.5rem;
+          margin-bottom: 2rem;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s;
+        }
+
+        body.light-mode .skill-category {
+          background: #ffffff;
+        }
+
+        .skill-category:hover {
+          transform: translateY(-5px);
+        }
+
+        .category-header {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid rgba(0, 173, 181, 0.3);
+        }
+
+        .category-header i {
+          font-size: 1.5rem;
+          color: #00adb5;
+        }
+
+        .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .skill-item {
+          background: #1b1f24;
+          padding: 1.2rem;
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.3s;
+        }
+
+        body.light-mode .skill-item {
+          background: #f0f0f0;
+        }
+
+        .skill-item:hover {
+          background: #252a32;
+          box-shadow: 0 10px 20px rgba(0, 173, 181, 0.2);
+          transform: translateY(-3px) scale(1.02);
+        }
+
+        body.light-mode .skill-item:hover {
+          background: #e0e0e0;
+        }
+
+        .skill-info {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        .skill-info img {
+          width: 30px;
+          height: 30px;
+          object-fit: contain;
+        }
+
+        .skill-level {
+          margin-top: auto;
+        }
+
+        .level-bar {
+          height: 8px;
+          background: rgba(238, 238, 238, 0.1);
+          border-radius: 4px;
+          overflow: hidden;
+          margin-bottom: 0.5rem;
+        }
+
+        body.light-mode .level-bar {
+          background: rgba(51, 51, 51, 0.1);
+        }
+
+        .level-bar::after {
+          content: '';
+          display: block;
+          height: 100%;
+          background: linear-gradient(90deg, #00adb5, #0081a7);
+          border-radius: 4px;
+          width: 0;
+          transition: width 1.5s ease;
+        }
+
+        .skill-level span {
+          font-size: 0.85rem;
+          color: rgba(238, 238, 238, 0.7);
+        }
+
+        body.light-mode .skill-level span {
+          color: rgba(51, 51, 51, 0.7);
+        }
+
+        /* تأثيرات حركية للبطاقات */
+        .skill-item {
+          transform: translateY(20px);
+          opacity: 0;
+          transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .skill-item.animate {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        /* تأثيرات hover متقدمة */
+        .skill-item:hover {
+          box-shadow: 0 10px 20px rgba(0, 173, 181, 0.2);
+          transform: translateY(-3px) scale(1.02);
+        }
+
+        /* ألوان متنوعة للمجموعات */
+        .skill-category:nth-child(odd) .category-header {
+          border-bottom-color: #00adb5;
+        }
+
+        .skill-category:nth-child(even) .category-header {
+          border-bottom-color: #0081a7;
+        }
+
+        @media (max-width: 768px) {
+          .skills-grid {
+            grid-template-columns: 1fr;
+          }
+          
+          .skill-category {
+            padding: 1rem;
+          }
+          
+          .section-header h2 {
+            font-size: 2rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .skills-filter {
+            flex-direction: column;
+          }
+          
+          .filter-btn {
+            width: 100%;
+            margin-bottom: 0.5rem;
+          }
+        }
+
         /* 🔹 Animations */
         @keyframes fadeIn {
             from {
@@ -908,6 +1108,7 @@
         .badge:hover .badge-tooltip {
             opacity: 1;
         }
+        
 
         /* Responsive Design */
         @media (max-width: 1200px) {
@@ -1141,6 +1342,7 @@
         <nav class="navigation" id="navigation">
             <ul>
                 <li><a href="#aboutMe">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#MyWorks">My Works</a></li>
                 <li><a href="#contactMe">Contact</a></li>
                 <li class="theme-toggle-container">
@@ -1175,46 +1377,136 @@
             <p class="aboutMePar">
                 Hey, I'm Moumen, a passionate Software Engineer who thrives on transforming complex ideas into elegant, user-friendly solutions. Currently honing my skills in mobile app development, I'm always eager to explore new technologies, push creative boundaries, and craft seamless digital experiences.
             </p>
+        </div>
+    </section>
 
-            <!-- Skills Section -->
-            <div class="skills-container">
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>JavaScript</span>
-                        <span>85%</span>
+    <!-- New Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="section">
+            <div class="section-header">
+                <h2>My <span>Skills</span></h2>
+                <p>Technologies and tools I'm proficient in</p>
+            </div>
+            
+            <div class="skill-category">
+                <div class="category-header">
+                    <i class="fas fa-code"></i>
+                    <h3>Frontend Development</h3>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="95%"></div>
+                            <span>Expert</span>
+                        </div>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="85%"></div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="90%"></div>
+                            <span>Advanced</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="85%"></div>
+                            <span>Advanced</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fab fa-react"></i>
+                            <span>React.js</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="80%"></div>
+                            <span>Proficient</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>HTML/CSS</span>
-                        <span>90%</span>
+            </div>
+            
+            <div class="skill-category">
+                <div class="category-header">
+                    <i class="fas fa-server"></i>
+                    <h3>Backend Development</h3>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fab fa-node-js"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="80%"></div>
+                            <span>Proficient</span>
+                        </div>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="90%"></div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fas fa-database"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="75%"></div>
+                            <span>Intermediate</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fas fa-fire"></i>
+                            <span>Firebase</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="70%"></div>
+                            <span>Intermediate</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>React</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="75%"></div>
-                    </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="category-header">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Development</h3>
                 </div>
-                
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>Node.js</span>
-                        <span>80%</span>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fab fa-react"></i>
+                            <span>React Native</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="85%"></div>
+                            <span>Advanced</span>
+                        </div>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="80%"></div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <i class="fas fa-robot"></i>
+                            <span>Flutter</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="level-bar" data-level="75%"></div>
+                            <span>Intermediate</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1297,17 +1589,9 @@
         
         <div class="email-box">
             <i class="fas fa-envelope email-icon"></i>
-            <a href="mailto:bramoumen6202@gmail.com" class="email-link">bramoumen6202@gmail.com</a>
+            <a href="mailto:bramoumen6@gmail.com" class="email-link">bramoumen6@gmail.com</a>
         </div>
         
-<!-- استخدم FormSubmit مباشرة في نموذجك -->
-<form class="contact-form" action="https://formsubmit.co/bramoumen6202@gmail.com" method="POST">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit" class="submit-btn">Send Message</button>
-</form>
         
         <div class="social-media">
             <a href="https://github.com/Moumen2012" class="social-link" target="_blank">
@@ -1321,16 +1605,15 @@
             </a>
         </div>
     </section>
-
     <!-- Achievement Badges -->
     <div class="badge-container">
         <div class="badge">
             <i class="fas fa-medal"></i>
-            <span class="badge-tooltip">Top Contributor 2023</span>
+            <span class="badge-tooltip">Top Contributor 2025</span>
         </div>
         <div class="badge">
             <i class="fas fa-code"></i>
-            <span class="badge-tooltip">100+ Projects</span>
+            <span class="badge-tooltip">20+ Projects</span>
         </div>
         <div class="badge">
             <i class="fas fa-heart"></i>
@@ -1530,10 +1813,23 @@
 
         // Animate Skill Bars on Scroll
         function animateSkills() {
-            const skills = document.querySelectorAll('.skill-progress');
+            const skills = document.querySelectorAll('.skill-progress, .level-bar::after');
+            
             skills.forEach(skill => {
-                const level = skill.getAttribute('data-level');
-                skill.style.width = level;
+                const level = skill.getAttribute('data-level') || '0%';
+                if (skill.classList.contains('level-bar')) {
+                    skill.querySelector('::after').style.width = level;
+                } else {
+                    skill.style.width = level;
+                }
+            });
+            
+            // Animate new skill items
+            const skillItems = document.querySelectorAll('.skill-item');
+            skillItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animate');
+                }, index * 150);
             });
         }
 
@@ -1542,7 +1838,7 @@
             particlesJS("particles-js", {
                 "particles": {
                     "number": {
-                        "value": 80,
+                        "value": window.innerWidth < 768 ? 30 : 80,
                         "density": {
                             "enable": true,
                             "value_area": 800
@@ -1675,6 +1971,35 @@
             }
         `;
         document.head.appendChild(style);
+        // Easter Egg للنقر المتتالي (يعمل على الهاتف والكمبيوتر)
+let tapCount = 0;
+let lastTapTime = 0;
+const secretArea = document.querySelector('header'); // المنطقة السرية (الـ Header)
+
+secretArea.addEventListener('click', (e) => {
+    const currentTime = new Date().getTime();
+    
+    // إذا كانت النقرات متتالية بسرعة (أقل من 500 مللي ثانية بينها)
+    if (currentTime - lastTapTime < 500) {
+        tapCount++;
+    } else {
+        tapCount = 1; // إعادة العداد إذا كانت النقرات بطيئة
+    }
+    lastTapTime = currentTime;
+
+    // إذا نقر 4 مرات بسرعة
+    if (tapCount === 4) {
+        activateEasterEgg();
+        tapCount = 0; // إعادة العداد
+    }
+});
+
+function activateEasterEgg() {
+    document.body.style.animation = 'rainbow 5s linear infinite';
+    setTimeout(() => {
+        document.body.style.animation = '';
+    }, 5000);
+}
 
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
@@ -1686,6 +2011,52 @@
                 animateSkills();
             });
         });
+        // Form Handling with FormSubmit
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = this;
+    const formMessage = document.getElementById('formMessage');
+    const submitBtn = form.querySelector('.submit-btn');
+    
+    // تعطيل الزر أثناء الإرسال
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    
+    // إرسال البيانات باستخدام Fetch API
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            formMessage.style.display = 'block';
+            formMessage.style.backgroundColor = '#e8f5e9'; // أخضر فاتح
+            formMessage.style.color = '#2e7d32'; // أخضر داكن
+            formMessage.textContent = 'Message sent successfully!';
+            form.reset(); // مسح النموذج
+        } else {
+            throw new Error('Failed to send message');
+        }
+    })
+    .catch(error => {
+        formMessage.style.display = 'block';
+        formMessage.style.backgroundColor = '#ffebee'; // أحمر فاتح
+        formMessage.style.color = '#c62828'; // أحمر داكن
+        formMessage.textContent = 'Error sending message. Please try again.';
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        
+        // إخفاء الرسالة بعد 5 ثوانٍ
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    });
+});
     </script>
 </body>
 </html>
